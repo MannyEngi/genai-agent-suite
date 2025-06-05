@@ -2,6 +2,12 @@ import requests
 import os
 from google.adk.agents import Agent
 from google.adk.tools import google_search
+from dotenv import load_dotenv
+
+load_dotenv()
+print(f"DEBUG: API Key = {os.getenv('OPENWEATHER_API_KEY')}")
+
+api_key = os.getenv("OPENWEATHER_API_KEY")
 
 def get_trip_type (prompt: str) -> dict:
     """
@@ -66,3 +72,7 @@ root_agent = Agent(
     # tools=[google_search],
     tools=[google_search, get_trip_type, get_weather_forecast], 
 )
+
+if __name__ == "__main__":
+    # Simple test
+    print(get_weather_forecast("Barcelona"))
